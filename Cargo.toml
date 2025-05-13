@@ -1,0 +1,18 @@
+[workspace]
+resolver = "2"
+members = [
+    "traceforge-macros",
+    "traceforge",
+]
+
+[profile.dev]
+opt-level = 3 
+
+[profile.release]
+opt-level = 3 
+
+[profile.test]
+opt-level = 3 
+
+[profile.bench]
+opt-level = 3 

@@ -1,0 +1,41 @@
+[package]
+name = "traceforge"
+edition = "2021"
+
+
+version = "0.2.0"
+
+exclude = ['/target' ]
+
+[dependencies]
+scoped-tls = "1.0.0"
+generator = "0.7.1"
+bitvec = "1.0.1"
+smallvec = "1.6.1"
+dyn-clone = "1.0.9"
+num_cpus = "1.15"
+rand = "0.8.5"
+rand_pcg = "0.3.1"
+exitcode = "1.1.2"
+futures = "*"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+paste = "1.0"
+traceforge-macros = { path="../traceforge-macros", version = "*" }
+log = { version = "0.4", features = ["release_max_level_off"] }
+dyn-hash = "0.2.0"
+dyn-eq = "0.1.3"
+merging-iterator = "1.3.0"
+
+[dev-dependencies] 
+serial_test = "*"
+num-integer = "*"
+simplelog = "^0.12.0"
+lazy_static = "1.4.0"
+
+[features]
+default = ["print_vals"]
+print_stamps = []
+print_vals = []
+print_vals_custom = []
+

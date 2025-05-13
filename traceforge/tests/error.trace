@@ -1,0 +1,1234 @@
+{
+  "sorted_error_graph": {
+    "label_order": [
+      {
+        "Begin": {
+          "label": {
+            "pos": {
+              "thread": 0,
+              "index": 0
+            },
+            "stamp": 0,
+            "hb": {
+              "clock": []
+            },
+            "porf": {
+              "clock": []
+            }
+          },
+          "parent": null,
+          "sym_id": null
+        }
+      },
+      {
+        "TCreate": {
+          "label": {
+            "pos": {
+              "thread": 0,
+              "index": 1
+            },
+            "stamp": 1,
+            "hb": {
+              "clock": [
+                1
+              ]
+            },
+            "porf": {
+              "clock": [
+                1
+              ]
+            }
+          },
+          "cid": 1,
+          "name": null,
+          "is_daemon": false,
+          "sym_cid": null
+        }
+      },
+      {
+        "TCreate": {
+          "label": {
+            "pos": {
+              "thread": 0,
+              "index": 2
+            },
+            "stamp": 5,
+            "hb": {
+              "clock": [
+                2
+              ]
+            },
+            "porf": {
+              "clock": [
+                2
+              ]
+            }
+          },
+          "cid": 2,
+          "name": null,
+          "is_daemon": false,
+          "sym_cid": null
+        }
+      },
+      {
+        "TCreate": {
+          "label": {
+            "pos": {
+              "thread": 0,
+              "index": 3
+            },
+            "stamp": 9,
+            "hb": {
+              "clock": [
+                3
+              ]
+            },
+            "porf": {
+              "clock": [
+                3
+              ]
+            }
+          },
+          "cid": 3,
+          "name": null,
+          "is_daemon": false,
+          "sym_cid": null
+        }
+      },
+      {
+        "Begin": {
+          "label": {
+            "pos": {
+              "thread": 3,
+              "index": 0
+            },
+            "stamp": 10,
+            "hb": {
+              "clock": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "porf": {
+              "clock": [
+                3,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "parent": {
+            "thread": 0,
+            "index": 3
+          },
+          "sym_id": null
+        }
+      },
+      {
+        "Begin": {
+          "label": {
+            "pos": {
+              "thread": 1,
+              "index": 0
+            },
+            "stamp": 2,
+            "hb": {
+              "clock": [
+                0,
+                0
+              ]
+            },
+            "porf": {
+              "clock": [
+                1,
+                0
+              ]
+            }
+          },
+          "parent": {
+            "thread": 0,
+            "index": 1
+          },
+          "sym_id": null
+        }
+      },
+      {
+        "SendMsg": {
+          "msg": {
+            "label": {
+              "pos": {
+                "thread": 0,
+                "index": 4
+              },
+              "stamp": 11,
+              "hb": {
+                "clock": [
+                  4
+                ]
+              },
+              "porf": {
+                "clock": [
+                  4
+                ]
+              }
+            },
+            "loc": {
+              "sender_tid": 0,
+              "tid": 1,
+              "tag": {
+                "Concrete": null
+              }
+            },
+            "maximal": true
+          },
+          "reader": {
+            "thread": 1,
+            "index": 1
+          }
+        }
+      },
+      {
+        "RecvMsg": {
+          "msg": {
+            "label": {
+              "pos": {
+                "thread": 1,
+                "index": 1
+              },
+              "stamp": 3,
+              "hb": {
+                "clock": [
+                  0,
+                  1
+                ]
+              },
+              "porf": {
+                "clock": [
+                  1,
+                  1
+                ]
+              }
+            },
+            "loc": {
+              "sender_tid": null,
+              "tid": 1,
+              "tag": {
+                "Predicate": null
+              }
+            },
+            "maximal": false
+          },
+          "rf": {
+            "thread": 0,
+            "index": 4
+          }
+        }
+      },
+      {
+        "SendMsg": {
+          "msg": {
+            "label": {
+              "pos": {
+                "thread": 1,
+                "index": 2
+              },
+              "stamp": 16,
+              "hb": {
+                "clock": [
+                  0,
+                  2
+                ]
+              },
+              "porf": {
+                "clock": [
+                  4,
+                  2
+                ]
+              }
+            },
+            "loc": {
+              "sender_tid": 1,
+              "tid": 3,
+              "tag": {
+                "Concrete": null
+              }
+            },
+            "maximal": true
+          },
+          "reader": {
+            "thread": 3,
+            "index": 1
+          }
+        }
+      },
+      {
+        "RecvMsg": {
+          "msg": {
+            "label": {
+              "pos": {
+                "thread": 3,
+                "index": 1
+              },
+              "stamp": 29,
+              "hb": {
+                "clock": [
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              "porf": {
+                "clock": [
+                  3,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            "loc": {
+              "sender_tid": null,
+              "tid": 3,
+              "tag": {
+                "Predicate": null
+              }
+            },
+            "maximal": false
+          },
+          "rf": {
+            "thread": 1,
+            "index": 2
+          }
+        }
+      },
+      {
+        "Begin": {
+          "label": {
+            "pos": {
+              "thread": 2,
+              "index": 0
+            },
+            "stamp": 6,
+            "hb": {
+              "clock": [
+                0,
+                0,
+                0
+              ]
+            },
+            "porf": {
+              "clock": [
+                2,
+                0,
+                0
+              ]
+            }
+          },
+          "parent": {
+            "thread": 0,
+            "index": 2
+          },
+          "sym_id": null
+        }
+      },
+      {
+        "SendMsg": {
+          "msg": {
+            "label": {
+              "pos": {
+                "thread": 0,
+                "index": 5
+              },
+              "stamp": 20,
+              "hb": {
+                "clock": [
+                  5
+                ]
+              },
+              "porf": {
+                "clock": [
+                  5
+                ]
+              }
+            },
+            "loc": {
+              "sender_tid": 0,
+              "tid": 2,
+              "tag": {
+                "Concrete": null
+              }
+            },
+            "maximal": true
+          },
+          "reader": {
+            "thread": 2,
+            "index": 1
+          }
+        }
+      },
+      {
+        "RecvMsg": {
+          "msg": {
+            "label": {
+              "pos": {
+                "thread": 2,
+                "index": 1
+              },
+              "stamp": 18,
+              "hb": {
+                "clock": [
+                  0,
+                  0,
+                  1
+                ]
+              },
+              "porf": {
+                "clock": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            "loc": {
+              "sender_tid": null,
+              "tid": 2,
+              "tag": {
+                "Predicate": null
+              }
+            },
+            "maximal": false
+          },
+          "rf": {
+            "thread": 0,
+            "index": 5
+          }
+        }
+      },
+      {
+        "SendMsg": {
+          "msg": {
+            "label": {
+              "pos": {
+                "thread": 2,
+                "index": 2
+              },
+              "stamp": 27,
+              "hb": {
+                "clock": [
+                  0,
+                  0,
+                  2
+                ]
+              },
+              "porf": {
+                "clock": [
+                  5,
+                  0,
+                  2
+                ]
+              }
+            },
+            "loc": {
+              "sender_tid": 2,
+              "tid": 3,
+              "tag": {
+                "Concrete": null
+              }
+            },
+            "maximal": true
+          },
+          "reader": {
+            "thread": 3,
+            "index": 2
+          }
+        }
+      },
+      {
+        "RecvMsg": {
+          "msg": {
+            "label": {
+              "pos": {
+                "thread": 3,
+                "index": 2
+              },
+              "stamp": 37,
+              "hb": {
+                "clock": [
+                  0,
+                  0,
+                  0,
+                  2
+                ]
+              },
+              "porf": {
+                "clock": [
+                  4,
+                  2,
+                  0,
+                  2
+                ]
+              }
+            },
+            "loc": {
+              "sender_tid": null,
+              "tid": 3,
+              "tag": {
+                "Predicate": null
+              }
+            },
+            "maximal": false
+          },
+          "rf": {
+            "thread": 2,
+            "index": 2
+          }
+        }
+      }
+    ],
+    "labels": [
+      {
+        "thread": 0,
+        "index": 2
+      },
+      {
+        "thread": 2,
+        "index": 0
+      },
+      {
+        "thread": 1,
+        "index": 2
+      },
+      {
+        "thread": 0,
+        "index": 0
+      },
+      {
+        "thread": 0,
+        "index": 3
+      },
+      {
+        "thread": 1,
+        "index": 0
+      },
+      {
+        "thread": 0,
+        "index": 4
+      },
+      {
+        "thread": 0,
+        "index": 5
+      },
+      {
+        "thread": 3,
+        "index": 1
+      },
+      {
+        "thread": 3,
+        "index": 2
+      },
+      {
+        "thread": 0,
+        "index": 1
+      },
+      {
+        "thread": 3,
+        "index": 0
+      },
+      {
+        "thread": 2,
+        "index": 2
+      },
+      {
+        "thread": 1,
+        "index": 1
+      },
+      {
+        "thread": 2,
+        "index": 1
+      }
+    ]
+  },
+  "error_state": {
+    "graph": {
+      "threads": [
+        [
+          {
+            "Begin": {
+              "label": {
+                "pos": {
+                  "thread": 0,
+                  "index": 0
+                },
+                "stamp": 0,
+                "hb": {
+                  "clock": []
+                },
+                "porf": {
+                  "clock": []
+                }
+              },
+              "parent": null,
+              "sym_id": null
+            }
+          },
+          {
+            "TCreate": {
+              "label": {
+                "pos": {
+                  "thread": 0,
+                  "index": 1
+                },
+                "stamp": 1,
+                "hb": {
+                  "clock": [
+                    1
+                  ]
+                },
+                "porf": {
+                  "clock": [
+                    1
+                  ]
+                }
+              },
+              "cid": 1,
+              "name": null,
+              "is_daemon": false,
+              "sym_cid": null
+            }
+          },
+          {
+            "TCreate": {
+              "label": {
+                "pos": {
+                  "thread": 0,
+                  "index": 2
+                },
+                "stamp": 5,
+                "hb": {
+                  "clock": [
+                    2
+                  ]
+                },
+                "porf": {
+                  "clock": [
+                    2
+                  ]
+                }
+              },
+              "cid": 2,
+              "name": null,
+              "is_daemon": false,
+              "sym_cid": null
+            }
+          },
+          {
+            "TCreate": {
+              "label": {
+                "pos": {
+                  "thread": 0,
+                  "index": 3
+                },
+                "stamp": 9,
+                "hb": {
+                  "clock": [
+                    3
+                  ]
+                },
+                "porf": {
+                  "clock": [
+                    3
+                  ]
+                }
+              },
+              "cid": 3,
+              "name": null,
+              "is_daemon": false,
+              "sym_cid": null
+            }
+          },
+          {
+            "SendMsg": {
+              "msg": {
+                "label": {
+                  "pos": {
+                    "thread": 0,
+                    "index": 4
+                  },
+                  "stamp": 11,
+                  "hb": {
+                    "clock": [
+                      4
+                    ]
+                  },
+                  "porf": {
+                    "clock": [
+                      4
+                    ]
+                  }
+                },
+                "loc": {
+                  "sender_tid": 0,
+                  "tid": 1,
+                  "tag": {
+                    "Concrete": null
+                  }
+                },
+                "maximal": true
+              },
+              "reader": {
+                "thread": 1,
+                "index": 1
+              }
+            }
+          },
+          {
+            "SendMsg": {
+              "msg": {
+                "label": {
+                  "pos": {
+                    "thread": 0,
+                    "index": 5
+                  },
+                  "stamp": 20,
+                  "hb": {
+                    "clock": [
+                      5
+                    ]
+                  },
+                  "porf": {
+                    "clock": [
+                      5
+                    ]
+                  }
+                },
+                "loc": {
+                  "sender_tid": 0,
+                  "tid": 2,
+                  "tag": {
+                    "Concrete": null
+                  }
+                },
+                "maximal": true
+              },
+              "reader": {
+                "thread": 2,
+                "index": 1
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Begin": {
+              "label": {
+                "pos": {
+                  "thread": 1,
+                  "index": 0
+                },
+                "stamp": 2,
+                "hb": {
+                  "clock": [
+                    0,
+                    0
+                  ]
+                },
+                "porf": {
+                  "clock": [
+                    1,
+                    0
+                  ]
+                }
+              },
+              "parent": {
+                "thread": 0,
+                "index": 1
+              },
+              "sym_id": null
+            }
+          },
+          {
+            "RecvMsg": {
+              "msg": {
+                "label": {
+                  "pos": {
+                    "thread": 1,
+                    "index": 1
+                  },
+                  "stamp": 3,
+                  "hb": {
+                    "clock": [
+                      0,
+                      1
+                    ]
+                  },
+                  "porf": {
+                    "clock": [
+                      1,
+                      1
+                    ]
+                  }
+                },
+                "loc": {
+                  "sender_tid": null,
+                  "tid": 1,
+                  "tag": {
+                    "Predicate": null
+                  }
+                },
+                "maximal": false
+              },
+              "rf": {
+                "thread": 0,
+                "index": 4
+              }
+            }
+          },
+          {
+            "SendMsg": {
+              "msg": {
+                "label": {
+                  "pos": {
+                    "thread": 1,
+                    "index": 2
+                  },
+                  "stamp": 16,
+                  "hb": {
+                    "clock": [
+                      0,
+                      2
+                    ]
+                  },
+                  "porf": {
+                    "clock": [
+                      4,
+                      2
+                    ]
+                  }
+                },
+                "loc": {
+                  "sender_tid": 1,
+                  "tid": 3,
+                  "tag": {
+                    "Concrete": null
+                  }
+                },
+                "maximal": true
+              },
+              "reader": {
+                "thread": 3,
+                "index": 1
+              }
+            }
+          },
+          {
+            "End": {
+              "label": {
+                "pos": {
+                  "thread": 1,
+                  "index": 3
+                },
+                "stamp": 17,
+                "hb": {
+                  "clock": [
+                    0,
+                    3
+                  ]
+                },
+                "porf": {
+                  "clock": [
+                    4,
+                    3
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Begin": {
+              "label": {
+                "pos": {
+                  "thread": 2,
+                  "index": 0
+                },
+                "stamp": 6,
+                "hb": {
+                  "clock": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "porf": {
+                  "clock": [
+                    2,
+                    0,
+                    0
+                  ]
+                }
+              },
+              "parent": {
+                "thread": 0,
+                "index": 2
+              },
+              "sym_id": null
+            }
+          },
+          {
+            "RecvMsg": {
+              "msg": {
+                "label": {
+                  "pos": {
+                    "thread": 2,
+                    "index": 1
+                  },
+                  "stamp": 18,
+                  "hb": {
+                    "clock": [
+                      0,
+                      0,
+                      1
+                    ]
+                  },
+                  "porf": {
+                    "clock": [
+                      2,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "loc": {
+                  "sender_tid": null,
+                  "tid": 2,
+                  "tag": {
+                    "Predicate": null
+                  }
+                },
+                "maximal": false
+              },
+              "rf": {
+                "thread": 0,
+                "index": 5
+              }
+            }
+          },
+          {
+            "SendMsg": {
+              "msg": {
+                "label": {
+                  "pos": {
+                    "thread": 2,
+                    "index": 2
+                  },
+                  "stamp": 27,
+                  "hb": {
+                    "clock": [
+                      0,
+                      0,
+                      2
+                    ]
+                  },
+                  "porf": {
+                    "clock": [
+                      5,
+                      0,
+                      2
+                    ]
+                  }
+                },
+                "loc": {
+                  "sender_tid": 2,
+                  "tid": 3,
+                  "tag": {
+                    "Concrete": null
+                  }
+                },
+                "maximal": true
+              },
+              "reader": {
+                "thread": 3,
+                "index": 2
+              }
+            }
+          },
+          {
+            "End": {
+              "label": {
+                "pos": {
+                  "thread": 2,
+                  "index": 3
+                },
+                "stamp": 28,
+                "hb": {
+                  "clock": [
+                    0,
+                    0,
+                    3
+                  ]
+                },
+                "porf": {
+                  "clock": [
+                    5,
+                    0,
+                    3
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Begin": {
+              "label": {
+                "pos": {
+                  "thread": 3,
+                  "index": 0
+                },
+                "stamp": 10,
+                "hb": {
+                  "clock": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "porf": {
+                  "clock": [
+                    3,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              "parent": {
+                "thread": 0,
+                "index": 3
+              },
+              "sym_id": null
+            }
+          },
+          {
+            "RecvMsg": {
+              "msg": {
+                "label": {
+                  "pos": {
+                    "thread": 3,
+                    "index": 1
+                  },
+                  "stamp": 29,
+                  "hb": {
+                    "clock": [
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  },
+                  "porf": {
+                    "clock": [
+                      3,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "loc": {
+                  "sender_tid": null,
+                  "tid": 3,
+                  "tag": {
+                    "Predicate": null
+                  }
+                },
+                "maximal": false
+              },
+              "rf": {
+                "thread": 1,
+                "index": 2
+              }
+            }
+          },
+          {
+            "RecvMsg": {
+              "msg": {
+                "label": {
+                  "pos": {
+                    "thread": 3,
+                    "index": 2
+                  },
+                  "stamp": 37,
+                  "hb": {
+                    "clock": [
+                      0,
+                      0,
+                      0,
+                      2
+                    ]
+                  },
+                  "porf": {
+                    "clock": [
+                      4,
+                      2,
+                      0,
+                      2
+                    ]
+                  }
+                },
+                "loc": {
+                  "sender_tid": null,
+                  "tid": 3,
+                  "tag": {
+                    "Predicate": null
+                  }
+                },
+                "maximal": false
+              },
+              "rf": {
+                "thread": 2,
+                "index": 2
+              }
+            }
+          }
+        ]
+      ],
+      "stamp": 38,
+      "msg_map": {
+        "2": [
+          {
+            "thread": 0,
+            "index": 5
+          }
+        ],
+        "3": [
+          {
+            "thread": 1,
+            "index": 2
+          },
+          {
+            "thread": 2,
+            "index": 2
+          }
+        ],
+        "1": [
+          {
+            "thread": 0,
+            "index": 4
+          }
+        ]
+      },
+      "monitor_sends": [],
+      "thdinfo": [
+        {
+          "label": {
+            "pos": {
+              "thread": 0,
+              "index": 0
+            },
+            "stamp": null,
+            "hb": {
+              "clock": []
+            },
+            "porf": {
+              "clock": []
+            }
+          },
+          "cid": 0,
+          "name": "main",
+          "is_daemon": false,
+          "sym_cid": null
+        },
+        {
+          "label": {
+            "pos": {
+              "thread": 0,
+              "index": 1
+            },
+            "stamp": null,
+            "hb": {
+              "clock": []
+            },
+            "porf": {
+              "clock": []
+            }
+          },
+          "cid": 1,
+          "name": null,
+          "is_daemon": false,
+          "sym_cid": null
+        },
+        {
+          "label": {
+            "pos": {
+              "thread": 0,
+              "index": 2
+            },
+            "stamp": null,
+            "hb": {
+              "clock": []
+            },
+            "porf": {
+              "clock": []
+            }
+          },
+          "cid": 2,
+          "name": null,
+          "is_daemon": false,
+          "sym_cid": null
+        },
+        {
+          "label": {
+            "pos": {
+              "thread": 0,
+              "index": 3
+            },
+            "stamp": null,
+            "hb": {
+              "clock": []
+            },
+            "porf": {
+              "clock": []
+            }
+          },
+          "cid": 3,
+          "name": null,
+          "is_daemon": false,
+          "sym_cid": null
+        }
+      ]
+    },
+    "rqueue": {}
+  },
+  "error_found": true,
+  "current_event": null,
+  "replay_mode": true,
+  "config": {
+    "stack_size": 32768,
+    "progress_report": 0,
+    "thread_threshold": 1000,
+    "warnings_as_errors": false,
+    "keep_going_after_error": false,
+    "mode": "Verification",
+    "cons_type": "WB",
+    "schedule_policy": "Arbitrary",
+    "verbose": 0,
+    "seed": 5493611420711415411,
+    "symmetry": false,
+    "vr": false,
+    "dot_file": null,
+    "trace_file": null,
+    "error_trace_file": "./tests/error.trace",
+    "turmoil_trace_file": null,
+    "parallel": false,
+    "parallel_workers": null
+  }
+}

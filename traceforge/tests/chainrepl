@@ -1,0 +1,271 @@
+use amzn_must::{
+    thread::{self, ThreadId},
+    Config, Nondet,
+};
+
+#[derive(Clone, Debug, PartialEq)]
+enum Request {
+    CPut(ThreadId, u32), // client request to put record
+    CGet(ThreadId),
+
+    Update(ThreadId, u32),
+
+    // reconfiguration messages
+    NewHead,
+    NewTail,
+    NewSucc,
+    NewPred,
+}
+
+#[derive(Clone, Debug, PartialEq)]
+enum Response {
+    PutOk(u32),
+    GetOk(Vec<u32>),
+}
+
+const INIT: u32 = 101010;
+
+#[derive(Clone, Debug, PartialEq)]
+pub struct Init {
+    pub coord: ThreadId,
+    pub chain: Vec<ThreadId>,
+}
+
+pub struct ChainState {
+    coord: ThreadId,
+    prev: Option<ThreadId>,
+    next: Option<ThreadId>,
+
+    head: bool,
+    tail: bool,
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub struct Configuration {
+    head: ThreadId,
+    tail: ThreadId,
+    version: u32,
+}
+
+fn initialize(r: Init) -> ChainState {
+    let myid = thread::current().id();
+    let pos = r.chain.iter().position(|id| *id == myid).unwrap();
+    let head = pos == 0;
+    let tail = pos == r.chain.len() - 1;
+    let prev = if head { None } else { Some(r.chain[pos - 1]) };
+    let next = if tail { None } else { Some(r.chain[pos + 1]) };
+    ChainState {
+        coord: r.coord,
+        prev,
+        next,
+        head,
+        tail,
+    }
+}
+
+fn chain() {
+    let mut log: Vec<u32> = vec![];
+    let r: Init = amzn_must::recv_tagged_msg_block(|_, t| t == Some(INIT));
+    let mut chainstate: ChainState = initialize(r);
+
+    loop {
+        let r: Request = amzn_must::recv_msg_block();
+        match r {
+            Request::CGet(tid) => {
+                if chainstate.tail {
+                    let v = log.clone();
+                    amzn_must::send_msg(tid, Response::GetOk(v));
+                }
+                // otherwise drop
+            }
+            Request::CPut(tid, v) => {
+                if chainstate.head {
+                    log.push(v);
+                    if chainstate.tail {
+                        amzn_must::send_msg(tid, Response::PutOk(v));
+                    } else {
+                        let next = chainstate.next.unwrap();
+                        amzn_must::send_msg(next, Request::Update(tid, v));
+                    }
+                }
+                // otherwise drop the request
+            }
+            Request::Update(tid, v) => {
+                log.push(v);
+                if chainstate.tail {
+                    amzn_must::send_msg(tid, Response::PutOk(v));
+                } else {
+                    amzn_must::send_msg(chainstate.next.unwrap(), Request::Update(tid, v));
+                }
+            }
+
+            Request::NewHead => {
+                chainstate.prev = None;
+                chainstate.head = true;
+            }
+
+            Request::NewTail => {
+                chainstate.next = None;
+                chainstate.tail = true;
+            }
+
+            Request::NewPred(tid) => {
+                chainstate.prev = Some(tid);
+            }
+
+            Request::NewSucc(tid) => {
+                chainstate.succ = Some(tid);
+            }
+        }
+    }
+}
+
+fn recover(chain: &mut Vec<ThreadId>, state: &mut Configuration, tid: ThreadId) {
+    assert!(chain.iter().find(|t| *t.clone() == tid).is_some());
+
+    if tid == state.head {
+        // remove head from the chain and make the successor the new head
+        assert!(chain.len() >= 2); // We can only tolerate faults if there are more nodes
+        let succ = chain[1];
+        amzn_must::send_msg(succ, Request::NewHead);
+        state.head = succ;
+        state.version = state.version + 1;
+    }
+
+    if tid == state.tail {
+        // remove tail from the chain and make the predecessor the new tail
+    }
+
+    todo!();
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub enum CoordinatorMessage {
+    Get(ThreadId),
+    CAS(ThreadId, Configuration, Configuration),
+    Fail(ThreadId), // from env
+}
+
+fn coord() {
+    let r: Init = amzn_must::recv_tagged_msg_block(|_, i| i == Some(INIT));
+    let mut chain = r.chain;
+    let len = chain.len();
+    assert!(len > 0);
+    let head = chain[0];
+    let tail = chain[len - 1];
+    let mut state = Configuration {
+        head: head,
+        tail: tail,
+        version: 0,
+    };
+
+    loop {
+        let r: CoordinatorMessage = amzn_must::recv_msg_block();
+        match r {
+            CoordinatorMessage::Get(tid) => {
+                amzn_must::send_msg(tid, state.clone());
+            }
+            CoordinatorMessage::Fail(tid) => {
+                println!("Thread {:?} failed", tid);
+                recover(&mut chain, &mut state, tid);
+            }
+            CoordinatorMessage::CAS(tid, old, new) => {
+                // TODO
+                todo!();
+            }
+        }
+    }
+}
+
+fn client(coord: ThreadId, req: RequestType) {
+    let myid = amzn_must::thread::current().id();
+    amzn_must::send_msg(coord, CoordinatorMessage::Get(myid));
+    let cfg: Configuration = amzn_must::recv_tagged_msg_block(move |t, _| t == coord.clone());
+    match req {
+        RequestType::Rd => {
+            amzn_must::send_msg(cfg.tail, Request::CGet(myid));
+            let r: Option<Response> = amzn_must::recv_msg(); // get the ok
+            match r {
+                None => println!("Timeout on request {:?}", req),
+                Some(resp) => println!("Response {:?} received", resp),
+            }
+        }
+        RequestType::Wr(v) => {
+            amzn_must::send_tagged_msg(cfg.head, cfg.version, Request::CPut(myid, v));
+            let r: Option<Response> = amzn_must::recv_msg(); // get the ok
+            match r {
+                None => println!("Timeout on request {:?}", req),
+                Some(resp) => println!("Response {:?} received", resp),
+            }
+        }
+    }
+}
+
+#[derive(Clone, Debug)]
+enum RequestType {
+    Rd,
+    Wr(u32),
+}
+
+fn mk_env(fault_budget: u32, conf: Init) {
+    let len = conf.chain.len();
+    let mut r = 0..len;
+    for _i in 0..fault_budget {
+        let id = r.nondet();
+        amzn_must::send_msg(
+            conf.coord,
+            CoordinatorMessage::Fail(*conf.chain.get(id).unwrap()),
+        );
+    }
+}
+
+fn scenario(chain_length: u32, requests: Vec<RequestType>, fault_budget: u32) {
+    let mut chain_elements = Vec::new();
+
+    // make chain
+    for i in 0..chain_length {
+        let t = amzn_must::thread::spawn_daemon(chain);
+        chain_elements.push(t);
+    }
+    // make coordinator
+    let coord = amzn_must::thread::spawn_daemon(|| coord());
+
+    let conf = Init {
+        coord: coord.thread().id(),
+        chain: chain_elements.iter().map(|t| t.thread().id()).collect(),
+    };
+
+    for t in chain_elements {
+        amzn_must::send_tagged_msg(t.thread().id(), INIT, conf.clone());
+    }
+    amzn_must::send_tagged_msg(coord.thread().id(), INIT, conf.clone());
+
+    // make env for failure
+    let env_thread = amzn_must::thread::spawn(move || mk_env(fault_budget, conf));
+
+    let mut clients = Vec::new();
+    // make clients
+    for i in 0..requests.len() {
+        let coord_id = coord.thread().id();
+        let req = requests[i].clone();
+        clients.push(amzn_must::thread::spawn(move || client(coord_id, req)));
+    }
+    for c in clients {
+        let _ = c.join();
+    }
+}
+
+#[test]
+fn chain_replication() {
+    let chain_length = 3;
+    let req = vec![RequestType::Wr(1), RequestType::Wr(2), RequestType::Rd];
+    let fault_budget = 1;
+    let stats = amzn_must::verify(
+        Config::builder()
+            //.with_verbose(2)
+            //.with_trace_out("/tmp/mpsc.traces")
+            .build(),
+        move || scenario(chain_length, req.clone(), fault_budget),
+    );
+    println!("Stats = execs {:}, blocked {:}", stats.execs, stats.block);
+}
