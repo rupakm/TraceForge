@@ -55,6 +55,11 @@ fn example() {
 Here, `thread::spawn` is a TraceForge API call to spawn a process, `send_msg` is a call to send a message, and `recv_msg_block`
 is a blocking message receive.
 The assertion can fail because the two messages to `t1` can race, and `Terminate` can be received before `Work`.
+However, finding and reproducing these kinds of bugs using standard testing techniques are difficult: they depend on a precise scheduling
+of message deliveries that may be missed in random testing.
+
+In contrast, TraceForge systematically explores all relevant message orderings to find such bugs; moreover, the specific schedules that lead to a bug
+are reproducible.
 
 TraceForge tests the function by wrappingthe execution to the `verify` function:
 
@@ -70,6 +75,18 @@ fn test_example() {
 
 The test will detect the assertion violation.
 
+## Building TraceForge
+
+To build TraceForge, run
+
+```
+cargo build
+```
+
+To run the unit tests, run
+```
+cargo test
+```
 
 ## Scaling Systematic Exploration
 
@@ -89,7 +106,7 @@ under the assumptions of the test scenario.
 TraceForge is inspired by other tools for checking concurrent Rust code, such as [Loom](http://github.com/tokio-rs/loom) and [Shuttle](https://github.com/awslabs/shuttle).
 
 
-## Security
+## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
