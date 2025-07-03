@@ -87,6 +87,13 @@ To run the unit tests, run
 ```
 cargo test
 ```
+We have put the above simple example in `traceforge/examples`. You can run it by executing
+```
+cd traceforge
+cargo run --example simple -- --random 
+cargo run --example simple -- --forge
+```
+The `--random` option runs a random test. The `--forge` option runs systematic tests (and should always panic).
 
 ## Scaling Systematic Exploration
 
