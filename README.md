@@ -61,7 +61,7 @@ of message deliveries that may be missed in random testing.
 In contrast, TraceForge systematically explores all relevant message orderings to find such bugs; moreover, the specific schedules that lead to a bug
 are reproducible.
 
-TraceForge tests the function by wrappingthe execution to the `verify` function:
+TraceForge tests the function by wrapping the execution to the `verify` function:
 
 ```
 fn test_example() {
@@ -95,7 +95,7 @@ cargo run --example simple -- --forge
 ```
 The `--random` option runs a random test. The `--forge` option runs systematic tests (and should always panic).
 While testing is very likely to find the assertion violation in this simple test, you can try running the `hard_to_find` example
-in `examples`. Random testing rarely finds the violation, but traceforge does.
+in `examples`. Random testing rarely finds the violation, but traceforge always does.
 
 ## Scaling Systematic Exploration
 
