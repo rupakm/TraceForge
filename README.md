@@ -95,7 +95,13 @@ cargo run --example simple -- --forge
 ```
 The `--random` option runs a random test. The `--forge` option runs systematic tests (and should always panic).
 While testing is very likely to find the assertion violation in this simple test, you can try running the `hard_to_find` example
-in `examples`. Random testing rarely finds the violation, but traceforge always does.
+in `examples` by running:
+```
+cd traceforge
+cargo run --example hard_to_find -- --random 
+cargo run --example hard_to_find -- --forge
+```
+Random testing rarely finds the violation, but traceforge always does.
 
 ## Scaling Systematic Exploration
 
